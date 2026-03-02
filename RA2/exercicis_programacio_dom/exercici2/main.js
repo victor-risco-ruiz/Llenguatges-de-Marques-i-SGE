@@ -86,6 +86,10 @@ divBarraVidaEnemic.style.width = percentatgeVidaEnemic + '%';
 
 let danyJugadorNormal = atacJugador - defensaEnemic;
 
+if (danyJugadorNormal <= 0) {
+    danyJugadorNormal = 1;
+}
+
 
 
 // ============================================
@@ -93,7 +97,8 @@ let danyJugadorNormal = atacJugador - defensaEnemic;
 // ============================================
 // Fórmula: Dany normal del jugador * 2
 
-let danyJugadorCritic;
+let danyJugadorCritic = danyJugadorNormal * 2;
+
 
 // ============================================
 // ✅ TASCA 6: Calcular dany normal de l'enemic
@@ -101,14 +106,18 @@ let danyJugadorCritic;
 // Fórmula: Atac de l'enemic - Defensa del jugador
 // Si el resultat és negatiu o 0, el dany ha de ser igual a 1
 
-let danyEnemicNormal;
+let danyEnemicNormal = atacEnemic - defensaJugador;
+
+if (danyEnemicNormal <= 0) {
+    danyEnemicNormal = 1;
+}
 
 // ============================================
 // ✅ TASCA 7: Calcular el dany d'un atac crític de l'enemic (x2)
 // ============================================
 // Fórmula: Dany normal de l'enemic * 2
 
-let danyEnemicCritic;
+let danyEnemicCritic = danyEnemicNormal * 2 ;
 
 // ============================================
 // ✅ TASCA 8: Actualitzar dany al DOM
@@ -116,10 +125,15 @@ let danyEnemicCritic;
 // Selecciona els elements del dany normal i crític del jugador i l'enemic
 // Actualitza els valors de dany normal i crític del jugador i l'enemic al DOM
 
-const divDanyJugadorNormal = ;
-const divDanyJugadorCritic = ;
-const divDanyEnemicNormal = ; 
-const divDanyEnemicCritic = ;
+const divDanyJugadorNormal = document.querySelector('#dany-jugador-normal');
+const divDanyJugadorCritic = document.querySelector('#dany-jugador-critic');
+const divDanyEnemicNormal = document.querySelector('#dany-enemic-normal');
+const divDanyEnemicCritic = document.querySelector('#dany-enemic-critic');
+
+divDanyJugadorNormal.textContent = danyJugadorNormal;
+divDanyJugadorCritic.textContent = danyJugadorCritic;
+divDanyEnemicNormal.textContent = danyEnemicNormal;
+divDanyEnemicCritic.textContent = danyEnemicCritic;
 
 // ============================================
 // PART 3: PROBABILITATS
