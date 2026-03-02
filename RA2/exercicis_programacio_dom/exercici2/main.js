@@ -84,7 +84,7 @@ divBarraVidaEnemic.style.width = percentatgeVidaEnemic + '%';
 // Fórmula: Atac del jugador - Defensa de l'enemic
 // Si el resultat és negatiu o 0, el dany ha de ser igual a 1
 
-let danyJugadorNormal = ;
+let danyJugadorNormal = atacJugador - defensaEnemic;
 
 
 
