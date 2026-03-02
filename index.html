@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Índice de Actividades</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+    <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --surface2: #0e0e18;
+      --border: #1e1e2e;
+      --border2: #2a2a3e;
+      --accent: #00ff9d;
+      --accent2: #7c3aed;
+      --accent3: #f59e0b;
+      --accent-html: #f87171;
+      --accent-css: #60a5fa;
+      --accent-js: #fbbf24;
+      --accent-json: #a78bfa;
+      --text: #e2e8f0;
+      --muted: #4a4a6a;
+      --muted2: #6a6a8a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,255,157,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,157,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(130px);
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .blob-1 { width: 500px; height: 500px; background: var(--accent2); top: -150px; right: -100px; }
+    .blob-2 { width: 400px; height: 400px; background: var(--accent); bottom: -100px; left: -100px; }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    header {
+      margin-bottom: 56px;
+      animation: fadeDown 0.6s ease both;
+    }
+
+    .tag-label {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: 1px solid rgba(0,255,157,0.3);
+      padding: 4px 12px;
+      border-radius: 2px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+
+    h1 em { font-style: normal; color: var(--accent); }
+
+    .subtitle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .subtitle::before { content: '>'; color: var(--accent); }
+
+    /* Topic section */
+    .topic {
+      margin-bottom: 48px;
+      animation: fadeUp 0.6s ease both;
+    }
+    .topic:nth-child(1) { animation-delay: 0.1s; }
+    .topic:nth-child(2) { animation-delay: 0.2s; }
+
+    .topic-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border2);
+    }
+
+    .topic-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    .topic-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      flex: 1;
+    }
+
+    .topic-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.06em;
+    }
+
+    /* Tema 1 - HTML/CSS: rojo/azul */
+    .topic-1 .topic-title { color: var(--accent-html); }
+    .topic-1 .topic-pill  { background: rgba(248,113,113,0.12); color: var(--accent-html); }
+    .topic-1 .topic-header { border-bottom-color: rgba(248,113,113,0.2); }
+    .topic-1 .activity-card { border-left-color: rgba(248,113,113,0.25); }
+    .topic-1 .activity-card:hover { border-left-color: var(--accent-html); background: #16111a; }
+    .topic-1 .card-arrow { color: var(--accent-html); }
+
+    /* Tema 2 - JS/JSON: amarillo */
+    .topic-2 .topic-title { color: var(--accent-js); }
+    .topic-2 .topic-pill  { background: rgba(251,191,36,0.12); color: var(--accent-js); }
+    .topic-2 .topic-header { border-bottom-color: rgba(251,191,36,0.2); }
+    .topic-2 .activity-card { border-left-color: rgba(251,191,36,0.25); }
+    .topic-2 .activity-card:hover { border-left-color: var(--accent-js); background: #16140f; }
+    .topic-2 .card-arrow { color: var(--accent-js); }
+
+    /* Cards list wrapper */
+    .cards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      margin-bottom: 6px;
+    }
+
+    /* Activity card */
+    .activity-card {
+      display: grid;
+      grid-template-columns: 52px 1fr auto auto;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 20px 14px 20px;
+      background: var(--surface);
+      border-left: 3px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.18s, border-left-color 0.18s, transform 0.18s;
+    }
+
+    .activity-card:hover { transform: translateX(3px); }
+
+    .card-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      text-align: center;
+      padding: 6px 4px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      transition: all 0.18s;
+    }
+
+    .activity-card:hover .card-number { border-color: rgba(255,255,255,0.15); color: var(--text); }
+
+    .card-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      flex-shrink: 0;
+    }
+
+    .tag-html  { background: rgba(248,113,113,0.12); color: var(--accent-html); }
+    .tag-css   { background: rgba(96,165,250,0.12);  color: var(--accent-css);  }
+    .tag-js    { background: rgba(251,191,36,0.12);  color: var(--accent-js);   }
+    .tag-json  { background: rgba(167,139,250,0.12); color: var(--accent-json); }
+
+    .card-arrow {
+      font-size: 14px;
+      opacity: 0;
+      transition: opacity 0.18s, transform 0.18s;
+      flex-shrink: 0;
+    }
+    .activity-card:hover .card-arrow { opacity: 1; transform: translateX(3px); }
+
+    /* Subfolder */
+    .subfolder {
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+
+    .subfolder-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 18px;
+      background: var(--surface2);
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.18s;
+    }
+
+    .subfolder-header:hover { background: #13131f; }
+
+    .subfolder-icon {
+      font-size: 10px;
+      color: var(--muted2);
+      transition: transform 0.22s;
+    }
+    .subfolder.open .subfolder-icon { transform: rotate(90deg); }
+
+    .subfolder-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted2);
+      flex: 1;
+      letter-spacing: 0.03em;
+    }
+
+    .subfolder-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .subfolder-body {
+      display: none;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+    .subfolder.open .subfolder-body { display: flex; }
+
+    /* indented cards inside subfolder */
+    .subfolder-body .activity-card {
+      padding-left: 36px;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+      margin-right: 6px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse    { 0%,100%{opacity:1} 50%{opacity:.3} }
+    @keyframes fadeDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeUp   { from{opacity:0;transform:translateY(20px)}  to{opacity:1;transform:translateY(0)} }
+
+    @media(max-width:600px){
+      .activity-card { grid-template-columns: 40px 1fr auto; }
+      .card-arrow    { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+
+<div class="container">
+
+  <header>
+    <div class="tag-label">// índice de actividades</div>
+    <h1><em>Actividades</em><br/>de Programación <em>Víctor Risco </em></h1>
+    <p class="subtitle">Repositorio organizado por temas del curso</p>
+  </header>
+
+  <!-- ══════════════════════════
+       TEMA 1 — HTML & CSS
+  ══════════════════════════ -->
+  <section class="topic topic-1">
+    <div class="topic-header">
+      <span class="topic-number">TEMA 01</span>
+      <span class="topic-title">HTML &amp; CSS</span>
+      <span class="topic-pill">6 actividades</span>
+    </div>
+
+    <div class="cards-list">
+      <a href="./RA1/html_exercicis/01-blog_personal/index.html" class="activity-card">
+        <div class="card-number">01</div>
+        <div class="card-title">Estructura básica HTML</div>
+        <span class="card-tag tag-html">HTML</span>
+        <span class="card-arrow">→</span>
+      </a>
+      <a href="./RA1/html_exercicis/01-exercicis_hmtl_horari_classe/index.html" class="activity-card">
+        <div class="card-number">02</div>
+        <div class="card-title">Formularis i etiquetes semàntiques</div>
+        <span class="card-tag tag-html">HTML</span>
+        <span class="card-arrow">→</span>
+      </a>
+      <a href="./RA1/html_exercicis/01-exercicis_html_revista_online/html_1.html" class="activity-card">
+        <div class="card-number">03</div>
+        <div class="card-title">Selectors i propietats CSS</div>
+        <span class="card-tag tag-html">HTML</span>
+        <span class="card-arrow">→</span>
+      </a>
+      <a href="./RA1/html_exercicis/01-selectors-basics/index.html" class="activity-card">
+        <div class="card-number">04</div>
+        <div class="card-title">Flexbox i Grid Layout</div>
+        <span class="card-tag tag-html">HTML</span>
+        <span class="card-arrow">→</span>
+      </a>
+      <a href="./RA1/html_exercicis/02-model-de-caixa/index.html" class="activity-card">
+        <div class="card-number">05</div>
+        <div class="card-title">Disseny responsiu i media queries</div>
+        <span class="card-tag tag-html">HTML</span>
+        <span class="card-arrow">→</span>
+      </a>
+      <a href="./RA1/html_exercicis/03-propietats-css-portfolio/index.html" class="activity-card">
+        <div class="card-number">06</div>
+        <div class="card-title">Projecte maquetació web</div>
+        <span class="card-tag tag-html">HTML</span>
+        <span class="card-arrow">→</span>
+      </a>
+            <a href="./RA1/Examen_RA1_VRR/00-examen-web-enunciat/index.html" class="activity-card">
+        <div class="card-number">07</div>
+        <div class="card-title">Examen RA1</div>
+        <span class="card-tag tag-html">HTML</span>
+        <span class="card-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════
+       TEMA 2 — JavaScript & JSON
+  ══════════════════════════ -->
+  <section class="topic topic-2">
+    <div class="topic-header">
+      <span class="topic-number">TEMA 02</span>
+      <span class="topic-title">JavaScript &amp; JSON</span>
+      <span class="topic-pill">9 actividades</span>
+    </div>
+
+    <!-- Subcarpeta: exercicis_gestio_dom -->
+    <div class="subfolder open" id="sf-gestio">
+      <div class="subfolder-header" onclick="toggleFolder('sf-gestio')">
+        <span class="subfolder-icon">▶</span>
+        <span class="subfolder-name">📁 exercicis_gestio_dom</span>
+        <span class="subfolder-count">3 fitxers</span>
+      </div>
+      <div class="subfolder-body">
+        <a href="./RA2/exercicis_gestio_dom/exercici1/index.html" class="activity-card">
+          <div class="card-number">g-01</div>
+          <div class="card-title">Seleccionar i modificar elements</div>
+          <span class="card-tag tag-js">JS</span>
+          <span class="card-arrow">→</span>
+        </a>
+        <a href="./RA2/exercicis_gestio_dom/exercici2/index.html" class="activity-card">
+          <div class="card-number">g-02</div>
+          <div class="card-title">Crear i eliminar nodes del DOM</div>
+          <span class="card-tag tag-js">JS</span>
+          <span class="card-arrow">→</span>
+        </a>
+        <a href="./RA2/exercicis_gestio_dom/exercici3/index.html" class="activity-card">
+          <div class="card-number">g-03</div>
+          <div class="card-title">Recórrer l'arbre DOM</div>
+          <span class="card-tag tag-js">JS</span>
+          <span class="card-arrow">→</span>
+        </a>
+
+          <a href="./RA2/exercicis_gestio_dom/exercici4/index.html" class="activity-card">
+          <div class="card-number">g-04</div>
+          <div class="card-title">Recórrer l'arbre DOM</div>
+          <span class="card-tag tag-js">JS</span>
+          <span class="card-arrow">→</span>
+        </a>
+
+
+          <a href="./RA2/exercicis_gestio_dom/exercici5/index.html" class="activity-card">
+          <div class="card-number">g-05</div>
+          <div class="card-title">Recórrer l'arbre DOM</div>
+          <span class="card-tag tag-js">JS</span>
+          <span class="card-arrow">→</span>
+        </a>
+
+
+          <a href="./RA2/exercicis_gestio_dom/exercici6/index.html" class="activity-card">
+          <div class="card-number">g-06</div>
+          <div class="card-title">Recórrer l'arbre DOM</div>
+          <span class="card-tag tag-js">JS</span>
+          <span class="card-arrow">→</span>
+        </a>
+
+
+          <a href="./RA2/exercicis_gestio_dom/exercici7/index.html" class="activity-card">
+          <div class="card-number">g-07</div>
+          <div class="card-title">Recórrer l'arbre DOM</div>
+          <span class="card-tag tag-js">JS</span>
+          <span class="card-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Subcarpeta: exercicis_programacio_dom -->
+    <div class="subfolder open" id="sf-prog">
+      <div class="subfolder-header" onclick="toggleFolder('sf-prog')">
+        <span class="subfolder-icon">▶</span>
+        <span class="subfolder-name">📁 exercicis_programacio_dom</span>
+        <span class="subfolder-count">3 fitxers</span>
+      </div>
+
+      <div class="subfolder-body">
+          <a href="./RA2/exercicis_programacio_dom/exercici1/index.html" class="activity-card">
+          <div class="card-number">p-01</div>
+          <div class="card-title">Esdeveniments i listeners</div>
+          <span class="card-tag tag-js">JS</span>
+          <span class="card-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    <span><span class="dot"></span>2025/26 — Activitats del curs</span>
+    <span>// 2 temes · 2 subcarpetes</span>
+  </footer>
+
+</div>
+
+<script>
+  function toggleFolder(id) {
+    document.getElementById(id).classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
