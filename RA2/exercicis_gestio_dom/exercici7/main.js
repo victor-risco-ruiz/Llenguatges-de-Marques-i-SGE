@@ -310,9 +310,46 @@ barbar2DIV.append(barbar2NOM,barbar2STATS,barbar2IMG)
 zonaAliada.append(barbar2DIV);
 totalAliats ++;
 comptadorAliats.textContent = totalAliats;
+comptadorTotal.textContent = totalEnemics + totalAliats;
 
 // - Un Rei Bàrbar (classes: 'tropa' i 'king-barbarian')
+const kingbarbarianDIV = document.createElement('div');
+kingbarbarianDIV.classList.add('tropa','kingbarbarian')
+const kingbarbarianIMG = document.createElement('img');
+const kingbarbarianNOM = document.createElement('p');
+const kingbarbarianSTATS = document.createElement('p');
+kingbarbarianIMG.setAttribute('src','./img/king-barbarian.webp')
+kingbarbarianIMG.setAttribute('alt','Barbars')
+kingbarbarianNOM.textContent = 'Barbar'
+kingbarbarianNOM.style.fontWeight = 'Bold';
+kingbarbarianSTATS.textContent = '❤️ 78 • ⚔️ 16'
+kingbarbarianSTATS.style.fontWeight = 'Bold';
+kingbarbarianDIV.append(kingbarbarianNOM,kingbarbarianSTATS,kingbarbarianIMG)
+zonaAliada.append(kingbarbarianDIV);
+totalAliats ++;
+comptadorAliats.textContent = totalAliats;
+comptadorTotal.textContent = totalEnemics + totalAliats;
+
+
 // - Un segon Gegant
+const giant2DIV = document.createElement('div');
+giant2DIV.classList.add('tropa','giant')
+const giant2IMG = document.createElement('img');
+const giant2NOM = document.createElement('p');
+const giant2STATS = document.createElement('p');
+giant2IMG.setAttribute('src','./img/giant.webp')
+giant2IMG.setAttribute('alt','Giants')
+giant2NOM.textContent = 'Giant'
+giant2NOM.style.fontWeight = 'Bold';
+giant2STATS.textContent = '❤️ 380 • ⚔️ 25';
+giant2STATS.style.fontWeight = 'Bold';
+giant2DIV.append(giant2NOM,giant2STATS,giant2IMG)
+zonaAliada.append(giant2DIV);
+totalAliats ++;
+comptadorAliats.textContent = totalAliats;
+comptadorTotal.textContent = totalEnemics + totalAliats;
+
+
 //
 // ENEMICS:
 // - Un segon Goblin
@@ -331,6 +368,7 @@ goblin2DIV.append(goblin2NOM,goblin2STATS,goblin2IMG)
 zonaEnemiga.append(goblin2DIV);
 totalEnemics ++;
 comptadorEnemics.textContent = totalEnemics;
+comptadorTotal.textContent = totalEnemics + totalAliats;
 
 // - Un segon Drac
 const dragon2DIV = document.createElement('div');
@@ -348,6 +386,8 @@ dragon2DIV.append(dragon2NOM,dragon2STATS,dragon2IMG)
 zonaEnemiga.append(dragon2DIV);
 totalEnemics ++;
 comptadorEnemics.textContent = totalEnemics;
+comptadorTotal.textContent = totalEnemics + totalAliats;
+
 // - Un segon Esquelet
 const skeleton2DIV = document.createElement('div');
 skeleton2DIV.classList.add('tropa','skeleton')
@@ -364,23 +404,46 @@ skeleton2DIV.append(skeleton2NOM,skeleton2STATS,skeleton2IMG)
 zonaEnemiga.append(skeleton2DIV);
 totalEnemics ++;
 comptadorEnemics.textContent = totalEnemics;
+comptadorTotal.textContent = totalEnemics + totalAliats;
+
 
 //
 // Recorda actualitzar els comptadors cada vegada!
+comptadorTotal.textContent = totalEnemics + totalAliats;
+
 
 // ============================================
-// TASCA FINAL 2: Eliminar tropes del camp
+// TASCA FINAL 2: Eliminar tropes del camp PREGUNTAR XAVI
 // ============================================
 // Simula que una tropa ha estat derrotada!
 // Recorda actualitzar els comptadors després d'eliminar una tropa.
 //
 // Prova d'eliminar:
 // - El primer Bàrbar (aliat derrotat)
+const primerBarbar = document.querySelector('.tropa.barbarian');
+primerBarbar.remove();
+totalAliats--;
+comptadorAliats.textContent = totalAliats;
+comptadorTotal.textContent = totalEnemics + totalAliats;
+
 // - El primer Goblin (enemic derrotat)
+const primerGoblin = document.querySelector('.tropa.goblin');
+primerGoblin.remove();
+totalEnemics--;
+comptadorEnemics.textContent = totalEnemics;
+comptadorTotal.textContent = totalEnemics + totalAliats;
+
+
 
 // ============================================
-// TASCA FINAL 3: Eliminar els missatges "empty"
+// TASCA FINAL 3: Eliminar els missatges "empty" PREGUNTAR XAVI
 // ============================================
 // Quan ja tens tropes al camp, els missatges "No tens tropes" i "Encara no hi ha enemics" s'han d'eliminar.
 //
 // Selecciona'ls i elimina'ls (.empty-message')
+const misatgeAliat = document.querySelector('.empty-message');
+misatgeAliat.remove();
+
+const misatgeEnemic = document.querySelector('.empty-message');
+misatgeEnemic.remove();
+
