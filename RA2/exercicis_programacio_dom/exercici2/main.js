@@ -146,11 +146,24 @@ divDanyEnemicCritic.textContent = danyEnemicCritic;
 // Fórmula Enemic: Velocitat Enemic / 5 (i com a màxim 30%)
 // Selecciona els elements de probabilitat d'atac crític del jugador i l'enemic
 // Actualitza el DOM amb el percentatge de probabilitat d'atac crític
-let probCriticJugador;
-let probCriticEnemic;
+let probCriticJugador = velocitatJugador / 5;
+if (probCriticJugador > 30) {
+    probCriticJugador = 30
+}
 
-const divProbCriticJugador;
-const divProbCriticEnemic;
+let probCriticEnemic  = velocitatEnemic / 5;
+if (probCriticEnemic > 30) {
+    probCriticEnemic = 30
+}
+
+const divProbCriticJugador  = document.querySelector('#prob-critic-jugador');
+
+
+const divProbCriticEnemic = document.querySelector('#prob-critic-enemic');
+
+divProbCriticJugador.textContent = `${probCriticJugador}%`;
+divProbCriticEnemic.textContent = `${probCriticEnemic}%`;
+
 
 // ============================================
 // ✅ TASCA 10: Calcular les probabilitats d'esquivar l'atac (% de poder esquivar un atac)
@@ -159,12 +172,24 @@ const divProbCriticEnemic;
 // Fórmula Enemic: Velocitat Enemic / 6 (i com a màxim un 20%)
 // Selecciona els elements de probabilitat d' esquivar del jugador i l'enemic
 // Actualitza el DOM amb el percentatge de probabilitat d'esquivar l'atac
+// Math.floor( para redondear
+let probEsquivaJugador = Math.floor(velocitatJugador / 6);
+if (probEsquivaJugador > 20) {
+    probEsquivaJugador = 20
+}
 
-let probEsquivaJugador;
-let probEsquivaEnemic;
 
-const divProbEsquivaJugador;
-const divProbEsquivaEnemic;
+let probEsquivaEnemic = Math.floor(velocitatEnemic / 6);
+if (probEsquivaEnemic > 20) {
+    probEsquivaEnemic = 20
+}
+
+const divProbEsquivaJugador  = document.querySelector('#prob-esquiva-jugador');
+
+const divProbEsquivaEnemic = document.querySelector('#prob-esquiva-enemic');
+
+divProbEsquivaJugador.textContent = `${probEsquivaJugador}%`;
+divProbEsquivaEnemic.textContent = `${probEsquivaEnemic}%`;;
 
 // ============================================
 // PART 4: PREDICCIONS
@@ -178,8 +203,15 @@ const divProbEsquivaEnemic;
 // Actualitza el DOM amb el nom del personatge que ataca primer
 
 let quiAtacaPrimer;
+if (velocitatJugador > velocitatEnemic) {
+    quiAtacaPrimer = nomJugador;
+} else {
+    quiAtacaPrimer = nomEnemic;
+}
 
-const divQuiPrimer;
+const divQuiPrimer = document.querySelector('#qui-primer');
+
+divQuiPrimer.textContent = quiAtacaPrimer;
 
 // ============================================
 // ✅ TASCA 12: Calcular els possibles torns necessaris per guanyar
@@ -189,9 +221,11 @@ const divQuiPrimer;
 // Selecciona l'element del DOM que mostrarà els torns necessaris per guanyar
 // Actualitza el DOM amb els torns necessaris per guanyar
 
-let tornsNecessarisJugador;
+let tornsNecessarisJugador = Math.round(vidaActualEnemic / danyJugadorNormal);
 
-const divTornsGuanyar;
+const divTornsGuanyar = document.querySelector('#torns-guanyar');
+
+divTornsGuanyar.textContent = tornsNecessarisJugador
 
 // ============================================
 // ✅ TASCA 13: Calcular vida restant del Jugador després del combat (sense crítics ni atacs esquivats)
@@ -202,10 +236,12 @@ const divTornsGuanyar;
 // Selecciona l'element del DOM que mostrarà la vida restant del jugador
 // Actualitza el DOM amb la vida restant (si el valor és negatiu, has de mostrar 0)
 
-let danyTotalRebut;
-let vidaRestant;
+let danyTotalRebut = danyEnemicNormal * tornsNecessarisJugador ;
+let vidaRestant = vidaMaximaJugador - danyTotalRebut;
 
-const divVidaRestant;
+const divVidaRestant = document.querySelector('#vida-restant');
+
+divVidaRestant.textContent = vidaRestant
 
 // ============================================
 // TASCA 14: Calcular probabilitat de victòria després de la predicció anterior de vida restant
@@ -220,13 +256,17 @@ const divVidaRestant;
 
 let probVictoria = 0;
 
-// ============================================
-// PART 5: SIMULACIÓ D'UN TORN
-// ============================================
+if (vidaRestant >= 75) {
+    probVictoria = 100
+} else if (vidaRestant >= 50) {
+    probVictoria = 75
+} else if (vidaRestant >= 25) {
+    probVictoria = 55
+} else {
+    probVictoria = 10
+}
 
-// TASCA GRUPAL: SIMULAR UN TORN DE COMBAT
-// ============================================
-// Simula un torn de combat on ataqui el personatge que toca segons la velocitat
-// Has de tenir en compte les probabilitats d'atac crític i d'esquivar l'atac
-// Actualitza la vida dels personatges després de cada atac
-// Mostra al log del combat cada acció que es realitza (qui ataca, si és crític o normal, si s'esquiva, vida restant, etc.)
+const divProbVictoria = document.querySelector('#prob-victoria');
+
+
+divProbVictoria.textContent =  `${probVictoria}%`
