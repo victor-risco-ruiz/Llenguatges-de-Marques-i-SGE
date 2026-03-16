@@ -48,7 +48,10 @@ let orTotal = 0;
 // ============================================
 // Utilitza Math.random() per generar un número aleatori entre 0 i 100
 
-let numeroAleatori1;
+let numeroAleatori1 = Math.floor(Math.random() * 101);
+console.log(numeroAleatori1)
+
+
 
 // ============================================
 // ✅ TASCA 2: Determinar la raresa amb if/else
@@ -66,10 +69,29 @@ let iconRaresa1; //⚪ / 🟢 / 🔵 / 🟣 / 🟡
 let orGuanyat1; // Random entre 50-100, 100-250, etc segons la raresa
 
 // Mostra per consola el número aleatori, la raresa, l'icona i l'or guanyat per comprovar que tot funciona correctament
-// console.log(`Cofre Fusta #1 - Número Aleatori: ${numeroAleatori1}`);
-// console.log(`Cofre Fusta #1 - Raresa: ${raresa1}`);
-// console.log(`Cofre Fusta #1 - Icon: ${iconRaresa1}`);
-// console.log(`Cofre Fusta #1 - Or Guanyat: ${orGuanyat1}`);
+
+if (numeroAleatori1 >= 0 && numeroAleatori1 < 61) {
+    raresa1 = 'Comú';
+    iconRaresa1 = '⚪';
+    orGuanyat1 = Math.floor(Math.random() * (100 - 50 + 1)) + 50;
+} else if (numeroAleatori1 > 60 && numeroAleatori1 < 95) {
+    raresa1 = 'Poc Comú';
+    iconRaresa1 = '🟢';
+    orGuanyat1 = Math.floor(Math.random() * (250 - 100 + 1)) + 100;
+} else if (numeroAleatori1 > 94 && numeroAleatori1 < 100) {
+    raresa1 = 'Rar';
+    iconRaresa1 = '🔵';
+    orGuanyat1 = Math.floor(Math.random() * (500 - 250 + 1)) + 250;
+} else {
+    raresa1 = 'Èpic';
+    iconRaresa1 = '🟣';
+  orGuanyat1 = Math.floor(Math.random() * (1000 - 500 + 1)) + 500;
+}
+
+console.log(`Cofre Fusta #1 - Número Aleatori: ${numeroAleatori1}`);
+console.log(`Cofre Fusta #1 - Raresa: ${raresa1}`);
+console.log(`Cofre Fusta #1 - Icon: ${iconRaresa1}`);
+console.log(`Cofre Fusta #1 - Or Guanyat: ${orGuanyat1}`);
 
 // ============================================
 // ✅ TASCA 3: Incrementar comptadors
