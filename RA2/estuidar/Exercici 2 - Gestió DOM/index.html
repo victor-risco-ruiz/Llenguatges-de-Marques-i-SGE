@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantilla HTML5</title>
+    <meta name="description" content="Plantilla ex HTML5">
+    <meta name="author" content="Victor Risco">
+    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+    <script type="module" src="./main.js"></script>
+    <!-- El defer espera a que es carregui tot el java scrip pero començar-->
+    <style>
+    button:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+    opacity: 0.6;
+    }
+    </style>
+
+</head>
+<body>
+
+    <!-- Ex01 -->
+    <h2>Ex01 - Seleccionar per ID</h2>
+    <p id="missatge">Text original del paràgraf.</p>
+
+    <!-- Ex02 -->
+    <h2>Ex02 - Seleccionar per classe</h2>
+    <p class="enemics">Goblin</p>
+    <p class="enemics">Orc</p>
+    <p class="enemics">Troll</p>
+
+    <!-- Ex03 -->
+    <h2>Ex03 - Afegir amb innerHTML</h2>
+    <div id="llista-jocs"></div>
+
+    <!-- Ex04 -->
+    <h2>Ex04 - Modificar atribut d'imatge</h2>
+    <!--<img id="imatge-ex04" src="imatge1.webp" alt="imatge" width="100">  -->
+
+    <!-- Ex05 -->
+    <h2>Ex05 - Esdeveniment de clic</h2>
+    <button id="boto-ex05">Fes clic (mira la consola)</button>
+
+    <!-- Ex06 -->
+    <h2>Ex06 - Comptador</h2>
+    <p id="comptador">0</p>
+    <button id="boto-ex06">+ Punt</button>
+
+    <!-- Ex07 -->
+    <h2>Ex07 - Image flip</h2>
+    <!--<img id="imatge-ex07" src="imatge1.webp" alt="flip" width="100"> -->
+    <button id="boto-ex07">Canvia imatge</button>
+
+    <!-- Ex08 -->
+    <h2>Ex08 - Mouseover / Mouseout</h2>
+    <div id="quadrat" style="width:80px; height:80px; background:blue;"></div>
+
+<!-- Ex09 -->
+    <h2>Ex09 - Keydown (mira la consola)</h2>
+    <p>Prem qualsevol tecla del teclat</p>
+
+    <!-- Ex10 -->
+    <h2>Ex10 - Botó desactivat</h2>
+    <button id="boto-ex10">Clica'm (1 sola vegada)</button>
+
+    <!-- Ex11 -->
+    <h2>Ex11 - classList.add</h2>
+    <style>.destacat { background-color: yellow; }</style>
+    <p id="text-ex11">Aquest és un text que es pot destacar.</p>
+    <button id="boto-ex11">Destacar text</button>
+    <!-- Ex12 -->
+    <h2>Ex12 - classList.remove</h2>
+    <p id="paragraf-ex12" class="destacat">Aquest text ja té la classe destacat.</p>
+    <button id="boto-ex12">Treure clase text</button>
+
+    <!-- Ex13 -->
+    <h2>Ex13 - createElement + append</h2>
+    <div id="pantalla"></div>
+    <button id="boto-ex13">Crear enemic</button>
+</body>
+</html>

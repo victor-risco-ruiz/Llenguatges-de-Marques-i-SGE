@@ -22,7 +22,7 @@
 
 // VARIABLE DE VIDA (Canvia aquest valor per fer proves)
 // Prova amb: 100, 75, 50, 30, 10, 5, 0
-let hp = 72;
+let hp = 0;
 
 // 📦 Seleccionar els elements necessaris
 const puntsVida = document.querySelector('#punts-vida');
@@ -42,17 +42,16 @@ barraVida.classList.remove('vida-alta', 'vida-mitjana', 'vida-baixa', 'vida-crit
 // Si hp està entre 31-50 → afegeix 'vida-mitjana'
 // Si hp està entre 11-30 → afegeix 'vida-baixa'
 // Si hp està entre 0-10 → afegeix 'vida-critica'
-
-if (hp > 50) {
-  barraVida.classList.add('vida-alta');
+if (hp>50) {
+    barraVida.classList.add('vida-alta');
 } else if ((hp > 30) & (hp <= 50)) {
-  barraVida.classList.add('vida-mitjana');
+    barraVida.classList.add('vida-mitjana');
 } else if ((hp > 10) & (hp <= 30)) {
-  barraVida.classList.add('vida-baixa');
-  } else if ((hp > 0) & (hp <= 10)) {
-  barraVida.classList.add('vida-critica');
+    barraVida.classList.add('vida-baixa');
+} else if ((hp > 0) & (hp <= 10)) {
+    barraVida.classList.add('vida-critica');
 } else {
-  barraVida.classList.add('vida-mort');
+    barraVida.classList.add('vida-mort');
 }
 
 // ============================================
@@ -61,33 +60,27 @@ if (hp > 50) {
 // La barra ha de tenir una amplada (width) igual al % de vida.
 barraVida.style.setProperty('width', `${hp}%`);
 
-
-
 // ============================================
 // TASCA 4: Actualitzar el text dels punts de vida
 // ============================================
 // El text ha de mostrar: "Punts de Vida - XX HP"
 puntsVida.textContent = `Punts de Vida: ${hp} HP`;
-
-if (hp > 50) {
-  puntsVida.textContent = `Vida Alta: ${hp} HP`;
+if (hp>50) {
+    puntsVida.textContent = `Vida Alta: ${hp} HP`;
 } else if ((hp > 30) & (hp <= 50)) {
-  puntsVida.textContent = `Vida Mitjana: ${hp} HP`;
+    puntsVida.textContent = `Vida Mitjana: ${hp} HP`;
 } else if ((hp > 10) & (hp <= 30)) {
-  puntsVida.textContent = `Vida Baixa: ${hp} HP`;
+    puntsVida.textContent = `Vida Baixa: ${hp} HP`;
 } else if ((hp > 1) & (hp <= 10)) {
-  puntsVida.textContent = `Vida Critica: ${hp} HP`;
-} else {
-  puntsVida.textContent = `Mort: ${hp} HP`;
+    puntsVida.textContent = `Vida Critica: ${hp} HP`;
+} else if (hp == 0) {
+    puntsVida.textContent = `Mort: ${hp} HP`;
 }
-
-
 // ============================================
 // TASCA 5: Actualitzar el percentatge visual
 // ============================================
 // El percentatge ha de mostrar: "XX%"
-
-percentatge.textContent = `${hp} %`;
+percentatge.textContent = `${hp}%`;
 
 // ============================================
 // TASCA FINAL: Experimenta!
