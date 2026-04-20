@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<llibres>
+    <llibre>
+        <isbn>1</isbn>
+        <titol>El pequenyo pepe</titol>
+        <autor>Pepito de los palotes</autor>
+        <any>2020</any>
+        <preu>13.99€</preu>
+    </llibre>
+    <llibre>
+        <isbn>2</isbn>
+        <titol>Los power rangers</titol>
+        <autor>Ricardo</autor>
+        <any>2000</any>
+        <preu>15.99€</preu>
+    </llibre>
+    <llibre>
+        <isbn>3</isbn>
+        <titol>Harry Potter</titol>
+        <autor>J.K Rowling</autor>
+        <any>1999</any>
+        <preu>20.99€</preu>
+    </llibre>
+</llibres>
