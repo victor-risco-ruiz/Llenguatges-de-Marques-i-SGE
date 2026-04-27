@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<joc>
+    <nom>Fornite</nom>
+    <plataforma>PC</plataforma>
+    <plataforma>Play Station</plataforma>
+    <plataforma>XBOX</plataforma>
+    <genere>Battle Royal</genere>
+    <any>2022</any>
+</joc>

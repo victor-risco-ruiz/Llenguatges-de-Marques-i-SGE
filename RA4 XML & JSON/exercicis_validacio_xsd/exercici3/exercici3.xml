@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<biblioteca xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./exercici3.xsd">
+    <llibre isbn="1">
+        <titol>El pequenyo pepe</titol>
+        <autor>Pepito de los palotes</autor>
+        <any>2020</any>
+        <preu>13.99</preu>
+    </llibre>
+    <llibre isbn="2">
+        <titol>Los power rangers</titol>
+        <autor>Ricardo</autor>
+        <any>2000</any>
+        <preu>15.99</preu>
+    </llibre>
+    <llibre isbn="3">
+        <titol>Harry Potter</titol>
+        <autor>J.K Rowling</autor>
+        <any>1999</any>
+        <preu>-20.99</preu>
+    </llibre>
+</biblioteca>

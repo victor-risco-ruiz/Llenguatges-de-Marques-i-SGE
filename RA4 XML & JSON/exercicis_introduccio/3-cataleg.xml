@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cataleg>
+    <joc id="1">
+        <nom>Fornite</nom>
+        <preu>Gratis</preu>
+        <desc>Battle Royal</desc>
+    </joc>
+    <joc id="2">
+        <nom>GTA V</nom>
+        <preu>50€</preu>
+        <desc>Online &amp; History</desc>
+    </joc>
+    <joc id="3">
+        <nom>RDM 2</nom>
+        <preu>53€</preu>
+        <desc>Open World &amp; History</desc>
+    </joc>
+    <joc id="4">
+        <nom>Jedi Survivor</nom>
+        <preu>33€</preu>
+        <desc>History</desc>
+    </joc>
+</cataleg>
